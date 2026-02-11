@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Server...</title>
+    
+    <link rel="icon" type="image/png" id="site-favicon" href="">
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="config.js"></script>
+
+    <style>
+        :root {
+            --rust-orange: #cd412b;
+            --rust-dark: #0f0f0f;
+            --glass-bg: rgba(20, 20, 20, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f0f0f0;
+            --status-green: #44b700;
+            --status-red: #d32f2f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; } /* Yumuşak kaydırma */
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--rust-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* --- ORTAK SECTION AYARLARI --- */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* PARALLAX EFEKTİ */
+            padding: 50px 20px;
+        }
+
+        /* KARARTMA KATMANI */
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 0;
+        }
+        
+        /* --- BÖLÜM 1: HERO --- */
+        #hero-section { z-index: 1; }
+        .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+
+        /* --- BÖLÜM 2: RULES --- */
+        #rules-section { z-index: 1; border-top: 5px solid var(--rust-orange); }
+
+        .server-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem; text-transform: uppercase; letter-spacing: 2px;
+            color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            margin-bottom: 20px; max-width: 90%; text-align: center;
+            word-wrap: break-word; line-height: 1.2;
+        }
+
+        /* İSTATİSTİK KUTUSU */
+        .live-stats {
+            background: var(--glass-bg); backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border); padding: 30px 40px;
+            border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            margin: 30px 0; display: flex; gap: 40px;
+            justify-content: center; align-items: flex-start; flex-wrap: wrap;
+            max-width: 1100px;
+        }
+
+        .stat-item { display: flex; flex-direction: column; align-items: center; min-width: 140px; position: relative; }
+        .stat-item.interactive { cursor: pointer; transition: 0.3s; }
+        .stat-item.interactive:hover .stat-value { color: var(--rust-orange); text-shadow: 0 0 15px rgba(205, 65, 43, 0.4); }
+        
+        .stat-value { font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: bold; color: white; margin-bottom: 5px; white-space: nowrap; }
+        .stat-label { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+        
+        .status-dot { width: 20px; height: 20px; border-radius: 50%; background-color: #555; margin-bottom: 10px; margin-top: 5px; }
+        .online { background-color: var(--status-green); box-shadow: 0 0 15px var(--status-green); animation: pulse-green 2s infinite; }
+        .offline { background-color: var(--status-red); box-shadow: 0 0 15px var(--status-red); }
+        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(68, 183, 0, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(68, 183, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(68, 183, 0, 0); } }
+        
+        .highlight-orange { color: var(--rust-orange); }
+
+        /* BUTONLAR */
+        .btn-container { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+        .btn { padding: 14px 30px; font-family: 'Oswald', sans-serif; font-size: 1rem; text-transform: uppercase; border: none; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: flex; align-items: center; gap: 10px; color: white; font-weight: bold; min-width: 140px; justify-content: center; }
+        
+        .btn-play { background: var(--rust-orange); }
+        .btn-play:hover { background: #ff5238; transform: translateY(-3px); box-shadow: 0 5px 20px rgba(205, 65, 43, 0.4); }
+        
+        .btn-discord { background: #5865F2; }
+        .btn-discord:hover { background: #4650c4; transform: translateY(-3px); }
+        
+        .btn-store { background: #27ae60; }
+        .btn-store:hover { background: #2ecc71; transform: translateY(-3px); box-shadow: 0 5px 20px rgba(46, 204, 113, 0.3); }
+
+        /* AŞAĞI KAYDIR OKU */
+        .scroll-down {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 3;
+            color: rgba(255,255,255,0.7); font-size: 2rem; animation: bounce 2s infinite; cursor: pointer;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);} 40% {transform: translateX(-50%) translateY(-10px);} 60% {transform: translateX(-50%) translateY(-5px);} }
+
+        /* KURALLAR BÖLÜMÜ */
+        .rules-container {
+            position: relative; z-index: 2;
+            background: var(--glass-bg); backdrop-filter: blur(10px);
+            border-left: 5px solid var(--rust-orange);
+            padding: 40px; border-radius: 5px;
+            max-width: 900px; width: 100%;
+        }
+
+        .rules-title {
+            position: relative; z-index: 2;
+            font-family: 'Oswald', sans-serif; font-size: 3rem; color: white; margin-bottom: 30px;
+            text-align: center; text-transform: uppercase; text-shadow: 2px 2px 10px black;
+        }
+
+        .rules-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+
+        .rule-card {
+            background: rgba(255,255,255,0.05); padding: 20px; border-radius: 4px;
+            font-size: 1.1rem; display: flex; align-items: center; gap: 15px; transition: 0.2s;
+        }
+        .rule-card:hover { background: rgba(255,255,255,0.1); transform: translateX(10px); }
+        .rule-number { font-family: 'Oswald'; font-size: 1.5rem; color: var(--rust-orange); font-weight: bold; }
+
+        /* HARİTA MODALI */
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.3s forwards; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .modal-content { background: #151515; padding: 10px; border-radius: 8px; text-align: center; width: 90%; max-width: 1000px; height: 80vh; border: 1px solid var(--rust-orange); position: relative; display: flex; flex-direction: column; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; color: #ccc; font-family: 'Oswald'; border-bottom: 1px solid #333; margin-bottom: 10px; }
+        .close-btn { color: var(--rust-orange); font-size: 24px; cursor: pointer; transition: 0.2s; } .close-btn:hover { color: white; transform: rotate(90deg); }
+        .map-frame { flex-grow: 1; width: 100%; border: none; background: #000; border-radius: 4px; }
+        
+        .loader { border: 3px solid #333; border-top: 3px solid var(--rust-orange); border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; margin: 10px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+            .server-title { font-size: 2.5rem; }
+            .live-stats { flex-direction: column; gap: 20px; padding: 25px; width: 100%; }
+            .btn-container { flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
+            section { background-attachment: scroll; } /* Mobilde parallaxı kapat */
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero-section">
+        <div class="overlay"></div>
+        
+        <div class="hero-content">
+            <h1 class="server-title" id="display-title">SERVER LOADING...</h1>
+            
+            <div class="live-stats">
+                <div class="stat-item"><div id="status-icon" class="status-dot"></div><span class="stat-label" id="status-text">CHECKING...</span></div>
+                <div class="stat-item"><span class="stat-value" id="player-count">--/--</span><span class="stat-label"><i class="fas fa-users"></i> Players</span></div>
+                <div class="stat-item"><span class="stat-value" id="last-wipe-date">--/--/-- --:--</span><span class="stat-label"><i class="fas fa-history"></i> Last Wipe</span></div>
+                <div class="stat-item"><span class="stat-value highlight-orange" id="next-wipe-date">--/--/-- --:--</span><span class="stat-label"><i class="fas fa-calendar-alt"></i> Next Wipe</span></div>
+                <div class="stat-item interactive" onclick="openMap()"><span class="stat-value" style="font-size: 1.4rem;"><i class="fas fa-map-marked-alt"></i> VIEW</span><span class="stat-label">Map & Seed</span></div>
+            </div>
+
+            <div id="loading-indicator" class="loader"></div>
+            <p id="loading-text" style="color:#666; font-size:0.8rem;">Retrieving Data...</p>
+
+            <div class="btn-container">
+                <a href="#" id="connect-btn" class="btn btn-play"><i class="fas fa-play"></i> CONNECT</a>
+                <a href="#" id="store-btn" target="_blank" class="btn btn-store"><i class="fas fa-shopping-cart"></i> STORE</a>
+                <a href="#" id="discord-btn" target="_blank" class="btn btn-discord"><i class="fab fa-discord"></i> DISCORD</a>
+            </div>
+        </div>
+
+        <a href="#rules-section" class="scroll-down"><i class="fas fa-chevron-down"></i></a>
+    </section>
+
+    <section id="rules-section">
+        <div class="overlay"></div>
+        
+        <h2 class="rules-title">SERVER RULES</h2>
+        
+        <div class="rules-container">
+            <div id="rules-grid" class="rules-grid">
+                </div>
+        </div>
+        
+        <footer style="position:relative; z-index:2; margin-top: 50px; color: #777; font-size: 0.8rem;">
+            &copy; 2026 github.com/nausofficial/
+        </footer>
+    </section>
+
+    <div id="mapModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>Seed: <span id="modal-seed">---</span> | Size: <span id="modal-size">---</span></div>
+                <div class="close-btn" onclick="closeMap()"><i class="fas fa-times"></i></div>
+            </div>
+            <iframe id="map-iframe" class="map-frame" src="" title="Server Map"></iframe>
+        </div>
+    </div>
+
+    <script>
+        if (typeof CONFIG === 'undefined') alert("HATA: config.js bulunamadı!");
+
+        // 1. LINKLER
+        document.getElementById('discord-btn').href = CONFIG.discordLink;
+        document.getElementById('store-btn').href = CONFIG.storeLink || '#';
+
+        // 2. GORSELLER
+        if (CONFIG.backgroundImage) document.getElementById('hero-section').style.backgroundImage = `url('${CONFIG.backgroundImage}')`;
+        if (CONFIG.rulesBackgroundImage) document.getElementById('rules-section').style.backgroundImage = `url('${CONFIG.rulesBackgroundImage}')`;
+        if (CONFIG.favicon) document.getElementById('site-favicon').href = CONFIG.favicon;
+
+        // 3. KURALLARI DOLDUR
+        const rulesGrid = document.getElementById('rules-grid');
+        if (CONFIG.rules && CONFIG.rules.length > 0) {
+            CONFIG.rules.forEach((rule, index) => {
+                let div = document.createElement('div');
+                div.className = 'rule-card';
+                // Sıra numarası (#1, #2...) ve kural metni
+                div.innerHTML = `<span class="rule-number">#${index + 1}</span> <span>${rule}</span>`;
+                rulesGrid.appendChild(div);
+            });
+        } else {
+            rulesGrid.innerHTML = "<p style='text-align:center; color:white;'>No rules configured in config.js</p>";
+        }
+
+        // 4. BATTLEMETRICS VERİSİ
+        const apiUrl = `https://api.battlemetrics.com/servers/${CONFIG.serverID}`;
+        let mapSeed = 0;
+        let mapSize = 0;
+
+        function formatFullDate(dateObj) {
+            return dateObj.toLocaleString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true });
+        }
+
+        async function fetchServerData() {
+            try {
+                const response = await fetch(apiUrl);
+                const json = await response.json();
+                const server = json.data.attributes;
+                const details = server.details || {};
+
+                // Başlık
+                document.title = server.name;
+                document.getElementById('display-title').innerText = server.name;
+
+                // Status
+                const statusDiv = document.getElementById('status-icon');
+                const statusText = document.getElementById('status-text');
+                if (server.status === 'online') {
+                    statusDiv.className = 'status-dot online'; statusText.innerText = 'ONLINE'; statusText.style.color = '#44b700';
+                } else {
+                    statusDiv.className = 'status-dot offline'; statusText.innerText = 'OFFLINE'; statusText.style.color = '#d32f2f';
+                }
+
+                // Players
+                document.getElementById('player-count').innerText = `${server.players}/${server.maxPlayers}`;
+
+                // Wipe Logic
+                let wipeString = details.rust_last_wipe;
+                if (wipeString) {
+                    const lastWipe = new Date(wipeString);
+                    const now = new Date();
+                    
+                    if (!isNaN(lastWipe.getTime())) {
+                        document.getElementById('last-wipe-date').innerText = formatFullDate(lastWipe);
+                        // Next Wipe Hesabı (Döngüsel)
+                        const cycleMs = CONFIG.wipeIntervalDays * 24 * 60 * 60 * 1000;
+                        let nextWipe = new Date(lastWipe.getTime() + cycleMs);
+                        while (nextWipe < now) { nextWipe = new Date(nextWipe.getTime() + cycleMs); }
+                        document.getElementById('next-wipe-date').innerText = formatFullDate(nextWipe);
+                    } else {
+                        document.getElementById('last-wipe-date').innerText = "Unknown"; document.getElementById('next-wipe-date').innerText = "Unknown";
+                    }
+                } else {
+                    document.getElementById('last-wipe-date').innerText = "Pending"; document.getElementById('next-wipe-date').innerText = "Pending";
+                }
+
+                // Map
+                mapSeed = details.rust_world_seed || '0';
+                mapSize = details.rust_world_size || '3500';
+                document.getElementById('modal-seed').innerText = mapSeed;
+                document.getElementById('modal-size').innerText = mapSize;
+                
+                // Connect
+                document.getElementById('connect-btn').href = `steam://connect/${CONFIG.ip}:${CONFIG.port}`;
+
+                document.getElementById('loading-indicator').style.display = 'none';
+                document.getElementById('loading-text').style.display = 'none';
+
+            } catch (error) {
+                console.error("Hata:", error);
+                document.getElementById('loading-text').innerText = "Data Fetch Error";
+            }
+        }
+
+        // MAP MODAL
+        function openMap() { document.getElementById('mapModal').style.display = "flex"; document.getElementById('map-iframe').src = `https://rustmaps.com/map/${mapSize}_${mapSeed}`; }
+        function closeMap() { document.getElementById('mapModal').style.display = "none"; document.getElementById('map-iframe').src = ""; }
+        window.onclick = function(event) { if (event.target == document.getElementById('mapModal')) closeMap(); }
+
+        fetchServerData();
+        setInterval(fetchServerData, 60000); 
+    </script>
+</body>
+</html>
