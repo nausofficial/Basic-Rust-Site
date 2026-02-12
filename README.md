@@ -2,6 +2,8 @@
 
 ![Site Preview](https://github.com/nausofficial/Basic-Rust-Site/blob/main/Site.png)
 
+![Site Preview](https://github.com/nausofficial/Basic-Rust-Site/blob/main/Site2.png)
+
 A free, modern, and automatic website for your Rust server. It updates player counts, wipe dates, and map info automatically using BattleMetrics.
 
 **No coding required.** Just edit `config.js`.
@@ -25,19 +27,37 @@ You only need to change this file.
 
 ```javascript
 const CONFIG = {
-    serverID: 'YOUR_BATTLEMETRICS_ID', // Get from URL: [battlemetrics.com/servers/rust/123456](https://battlemetrics.com/servers/rust/123456)
-    ip: '127.0.0.1',                   // Server IP
-    port: '28015',                     // Server Port
-    wipeIntervalDays: 7,               // How many days between wipes?
+    // 1. ADD YOUR SERVERS HERE
+    servers: [
+        {
+            id: '32428632',      // BattleMetrics ID (Get from URL)
+            ip: '127.0.0.1',     // Server IP
+            port: '28015',       // Server Port
+            wipeInterval: 7      // Days between wipes (e.g. 7 for weekly)
+        },
+        {
+            id: '12345678',      // Second Server ID
+            ip: '127.0.0.1',     
+            port: '28025',       
+            wipeInterval: 3      // Days between wipes
+        }
+    ],
     
-    // Visuals
-    backgroundImage: 'YOUR_IMAGE_LINK', 
+    // 2. VISUALS
+    backgroundImage: 'YOUR_HERO_IMAGE_LINK', 
+    rulesBackgroundImage: 'YOUR_RULES_IMAGE_LINK',
     favicon: 'YOUR_LOGO_LINK',
-    serverName: 'MY RUST SERVER',      // Your server name
 
-    // Links
+    // 3. LINKS
     discordLink: '[https://discord.gg/yourserver](https://discord.gg/yourserver)',
-    storeLink: '[https://yourstore.tebex.io](https://yourstore.tebex.io)'
+    storeLink: '[https://yourstore.tebex.io](https://yourstore.tebex.io)',
+
+    // 4. RULES
+    rules: [
+        "No Cheating or Scripting.",
+        "Max Team Limit: 3.",
+        "English only in chat."
+    ]
 };
 ```
 
@@ -72,4 +92,4 @@ We are constantly working to improve the player experience. Here are the feature
 ### 6. 🌍 Multi-Server Support
 **Description:** A feature to list and monitor multiple game servers (e.g., Main, 2x, 10x) on a single website tab.
 * **Why:** Communities often host multiple servers. This allows players to see the status and population of all servers at a glance without switching pages.
-* **Status: Planned**
+* **Status: ✅**
