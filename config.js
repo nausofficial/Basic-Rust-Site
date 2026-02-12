@@ -11,7 +11,13 @@ const CONFIG = {
             wipeInterval: 7      // Kaç günde bir wipe?
         },
         {
-            id: '30290667',      // BattleMetrics ID (Örn: 2x Server)
+            id: '30290660',      // BattleMetrics ID (Main Server)
+            ip: '127.0.0.1',     // IP
+            port: '28015',       // Port
+            wipeInterval: 7      // Kaç günde bir wipe?
+        },
+        {
+            id: '30290665',      // BattleMetrics ID (Örn: 2x Server)
             ip: '127.0.0.1',     
             port: '28015',       
             wipeInterval: 5      // Bu sunucu 3 günde bir wipe yiyor olsun
