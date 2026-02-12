@@ -1,6 +1,6 @@
 # 🌲 Rust Server Website Template
 
-![Site Preview](https://github.com/nausofficial/Basic-Rust-Site/blob/main/Site.png)
+![Site Preview](https://raw.githubusercontent.com/nausofficial/Basic-Rust-Site/refs/heads/main/Site.png)
 
 ![Site Preview](https://github.com/nausofficial/Basic-Rust-Site/blob/main/Site2.png)
 
