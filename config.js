@@ -5,13 +5,7 @@ const CONFIG = {
     // Buraya istediğin kadar sunucu ekleyebilirsin.
     servers: [
         {
-            id: '32428632',      // BattleMetrics ID (Main Server)
-            ip: '127.0.0.1',     // IP
-            port: '28015',       // Port
-            wipeInterval: 7      // Kaç günde bir wipe?
-        },
-        {
-            id: '30290660',      // BattleMetrics ID (Main Server)
+            id: '30290667',      // BattleMetrics ID (Main Server)
             ip: '127.0.0.1',     // IP
             port: '28015',       // Port
             wipeInterval: 7      // Kaç günde bir wipe?
@@ -21,6 +15,12 @@ const CONFIG = {
             ip: '127.0.0.1',     
             port: '28015',       
             wipeInterval: 5      // Bu sunucu 3 günde bir wipe yiyor olsun
+        },        
+        {
+            id: '30290660',      // BattleMetrics ID (Main Server)
+            ip: '127.0.0.1',     // IP
+            port: '28015',       // Port
+            wipeInterval: 7      // Kaç günde bir wipe?
         }
         // Virgül koyarak alta 3. sunucuyu da ekleyebilirsin...
     ],
