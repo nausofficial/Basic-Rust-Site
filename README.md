@@ -60,7 +60,7 @@ const CONFIG = {
     storeLink: '[https://rustbasicsitestore.tebex.io](https://store.tebex.io)'
 };
 ```
-2. Store & Kits Settings (kits.js)
+### 2. Store & Kits Settings (`kits.js`)
 Manage the kits displayed in the "Store" modal. You can define custom colors for the Glow Effect.
 
 ```javascript
