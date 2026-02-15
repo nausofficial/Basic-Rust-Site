@@ -25,26 +25,32 @@ const CONFIG = {
         // Virgül koyarak alta 3. sunucuyu da ekleyebilirsin...
     ],
 
+// ---------------------------------------------------------------
+    // 2. DUYURU BANDI (YENİ!) - NEWS TICKER
     // ---------------------------------------------------------------
-    // 2. GÖRSEL AYARLAR (VISUALS)
+    // Buraya yazdığın mesajlar sitenin en üstünde kayan yazı olarak çıkar.
+    newsMessages: [
+        "📢 MAP WIPED JUST NOW! JOIN FAST!",
+        "🔥 Double Sulfur Weekend Event is LIVE.",
+        "🎁 Join our Discord for VIP Giveaways.",
+        "⚠️ Server restart at 4:00 AM EST."
+    ],
+
     // ---------------------------------------------------------------
-    // Üst Kısım Arkaplanı
+    // 3. GÖRSEL AYARLAR
+    // ---------------------------------------------------------------
     backgroundImage: 'https://files.facepunch.com/paddy/20240905/rust_202409_ttk_heroimage.jpg', 
-    
-    // Alt Kısım Arkaplanı
     rulesBackgroundImage: 'https://images.squarespace-cdn.com/content/v1/627cb6fa4355783e5e375440/8331b066-8ae3-4ab5-ae34-b7f1f2c219b7/rust_04_outpost.jpg',
-    
-    // Favicon
     favicon: 'https://files.facepunch.com/lewis/1b2911b1/rust-marque.svg', 
 
     // ---------------------------------------------------------------
-    // 3. LİNKLER (LINKS)
+    // 4. LİNKLER
     // ---------------------------------------------------------------
     discordLink: 'https://discord.gg/seninlinkin',
     storeLink: 'https://store.tebex.io',
 
     // ---------------------------------------------------------------
-    // 4. KURALLAR (RULES)
+    // 5. KURALLAR
     // ---------------------------------------------------------------
     rules: [
         "No Cheating, Scripting, or Exploiting glitches.",
@@ -52,7 +58,6 @@ const CONFIG = {
         "No Racism, Homophobia, or Excessive Toxicity in chat.",
         "Griefing is allowed only during active raids.",
         "English only in global chat please.",
-        "Do not wall off major monuments (Launch, Outpost, etc).",
         "Respect staff decisions at all times."
     ]
 };
