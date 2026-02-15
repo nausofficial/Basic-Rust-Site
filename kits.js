@@ -2,22 +2,22 @@ const KITS = [
     {
         id: 'starter',
         name: 'STARTER KIT',
-        price: 'FREE',
-        image: 'https://i.imgur.com/8QZ7Z7u.png', // Örnek resim (Değiştir)
-        tebexPackageId: 'https://basicrustsitestore.tebex.io/package/123456', // Tebex linki
+        price: '$5.00',
+        image: 'https://files.facepunch.com/rust/item/stone.pickaxe_512.png', // Örnek Resim
+        tebexPackageId: 'https://basicrustsitestore.tebex.io/package/123456', 
         contents: [
             "1x Stone Hatchet",
             "1x Stone Pickaxe",
             "1000x Wood",
             "50x Scrap"
         ],
-        color: '#cd412b' // Kart rengi (Turuncu)
+        color: '#cd412b' // Turuncu (Rust Rengi)
     },
     {
         id: 'vip',
         name: 'VIP KIT',
         price: '$10.00',
-        image: 'https://i.imgur.com/5XqZ7Z7.png',
+        image: 'https://files.facepunch.com/rust/item/rifle.ak_512.png',
         tebexPackageId: 'https://basicrustsitestore.tebex.io/package/654321',
         contents: [
             "1x Assault Rifle (AK-47)",
@@ -26,13 +26,13 @@ const KITS = [
             "4x Syringe",
             "Skip Queue"
         ],
-        color: '#f1c40f' // Kart rengi (Altın)
+        color: '#f1c40f' // Altın (Gold)
     },
     {
         id: 'raider',
         name: 'RAIDER KIT',
         price: '$25.00',
-        image: 'https://i.imgur.com/9YxZ7Z7.png',
+        image: 'https://files.facepunch.com/rust/item/ammo.rocket.basic_512.png',
         tebexPackageId: 'https://basicrustsitestore.tebex.io/package/987654',
         contents: [
             "10x C4 Explosive",
@@ -40,6 +40,6 @@ const KITS = [
             "50x High Velocity Rocket",
             "Full Metal Gear Set"
         ],
-        color: '#e74c3c' // Kart rengi (Kırmızı/Tehlikeli)
+        color: '#e74c3c' // Kırmızı (Tehlikeli)
     }
 ];
