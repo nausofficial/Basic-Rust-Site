@@ -6,59 +6,88 @@
 
 A free, modern, and automatic website for your Rust server. It updates player counts, wipe dates, and map info automatically using BattleMetrics.
 
-**No coding required.** Just edit `config.js`.
+**No backend coding required.** Everything is managed via `config.js` and `kits.js`.
 
 ## ✨ Features
-* **Auto-Update:** Player count & Status (Online/Offline).
-* **Auto-Wipe:** Calculates Next Wipe date automatically (+Days).
-* **Auto-Map:** Shows the current map seed & size.
-* **Mobile Ready:** Looks great on phones.
+* **🌍 Multi-Server Support:** List unlimited servers (Main, 2x, 10x) side-by-side.
+* **🛍️ Premium Store UI:** Visual kit cards with glassmorphism & glow effects.
+* **📢 Live News Ticker:** Scrolling announcement bar at the top.
+* **🔄 Auto-Update:** Player count & Status (Online/Offline) from BattleMetrics.
+* **📅 Auto-Wipe:** Calculates Next Wipe date automatically (+Days).
+* **🗺️ Auto-Map:** Shows the current map seed & size.
+* **📱 Mobile Ready:** Looks great on phones.
 
 ## 🛠️ How to Use
 
-1. **Download** `index.html` and `config.js` from this repository.
-2. **Open** `config.js` with a text editor (Notepad, VS Code).
-3. **Edit** the settings (Server ID, IP, Links).
+1.  **Download** or Clone this repository.
+2.  **Edit** `config.js` for server settings.
+3.  **Edit** `kits.js` for store packages.
 4. **Upload** the files to your GitHub repository or Host.
 
-## ⚙️ Configuration (`config.js`)
+## ⚙️ Configuration
 
-You only need to change this file.
+### 1. Server & General Settings (`config.js`)
+Manage your servers, links, and visuals here.
 
 ```javascript
 const CONFIG = {
-    // 1. ADD YOUR SERVERS HERE
+    // Add your servers here
     servers: [
         {
-            id: '32428632',      // BattleMetrics ID (Get from URL)
+            id: '32428632',      // BattleMetrics ID
             ip: '127.0.0.1',     // Server IP
-            port: '28015',       // Server Port
-            wipeInterval: 7      // Days between wipes (e.g. 7 for weekly)
+            port: '28015',       // Port
+            wipeInterval: 7      // Days between wipes
         },
         {
-            id: '12345678',      // Second Server ID
+            id: '12345678',      // Second Server
             ip: '127.0.0.1',     
             port: '28025',       
-            wipeInterval: 3      // Days between wipes
+            wipeInterval: 3      
         }
     ],
     
-    // 2. VISUALS
-    backgroundImage: 'YOUR_HERO_IMAGE_LINK', 
-    rulesBackgroundImage: 'YOUR_RULES_IMAGE_LINK',
-    favicon: 'YOUR_LOGO_LINK',
+    // Scrolling News Ticker
+    newsMessages: [
+        "📢 MAP WIPED JUST NOW!",
+        "🔥 VIP Giveaways on Discord!",
+        "⚠️ Server Restart at 04:00 AM."
+    ],
 
-    // 3. LINKS
+    // Visuals & Links
+    backgroundImage: 'YOUR_IMAGE_LINK', 
     discordLink: '[https://discord.gg/yourserver](https://discord.gg/yourserver)',
-    storeLink: '[https://yourstore.tebex.io](https://yourstore.tebex.io)',
-
-    // 4. RULES
-    rules: [
-        "No Cheating or Scripting.",
-        "Max Team Limit: 3.",
-        "English only in chat."
-    ]
+    storeLink: '[https://rustbasicsitestore.tebex.io](https://store.tebex.io)'
 };
+```
+2. Store & Kits Settings (kits.js)
+Manage the kits displayed in the "Store" modal. You can define custom colors for the Glow Effect.
+
+```javascript
+const KITS = [
+    {
+        id: 'vip',
+        name: 'VIP KIT',
+        price: '$10.00',
+        image: '[https://link-to-image.png](https://link-to-image.png)',
+        tebexPackageId: '[https://store.tebex.io/package/123456](https://store.tebex.io/package/123456)', 
+        contents: [
+            "1x AK-47",
+            "Metal Gear Set",
+            "Skip Queue"
+        ],
+        color: '#f1c40f' // Gold Glow Effect
+    },
+    {
+        id: 'raider',
+        name: 'RAIDER KIT',
+        price: '$25.00',
+        image: '[https://link-to-image.png](https://link-to-image.png)',
+        tebexPackageId: '...', 
+        contents: ["C4", "Rockets"],
+        color: '#e74c3c' // Red Glow Effect
+    }
+];
 ```
 
 ## 🚀 Roadmap & Planned Features
@@ -78,7 +107,7 @@ We are constantly working to improve the player experience. Here are the feature
 ### 3. 📦 Kit & VIP Previews
 **Description:** Visual cards showing what's inside the "Starter", "VIP", and "Raider" kits.
 * **Why:** Visuals sell better. Players are more likely to buy a VIP package if they can see the exact loot they will get on the website.
-* **Status: Planned**
+* **Status: ✅**
 
 ### 4. 🗳️ Vote & Reward Section**Description:** Direct links to server voting sites (like Rust-Servers.net) with a guide on how to claim in-game loot.
 * **Why:** Voting boosts the server's rank globally, bringing in more fresh players. A clear "Vote for Loot" section increases participation.
@@ -87,7 +116,7 @@ We are constantly working to improve the player experience. Here are the feature
 ### 5. 📢 Recent News Ticker
 **Description:** A small scrolling text bar showing the latest updates (e.g., "Map Wiped!", "Event at 8 PM", "New Kit Added").
 * **Why:** Keeps the website dynamic and informs visitors about immediate happenings without checking Discord.
-* **Status: Planned**
+* **Status: ✅**
 
 ### 6. 🌍 Multi-Server Support
 **Description:** A feature to list and monitor multiple game servers (e.g., Main, 2x, 10x) on a single website tab.
