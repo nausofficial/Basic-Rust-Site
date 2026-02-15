@@ -118,9 +118,25 @@
         .rule-card:hover { background: rgba(255,255,255,0.1); transform: translateX(10px); }
         .rule-number { font-family: 'Oswald'; font-size: 1.5rem; color: var(--rust-orange); font-weight: bold; }
 
-        /* --- MODAL (MAP & STORE) --- */
-        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); justify-content: center; align-items: center; flex-direction: column; }
+        /* --- MODAL (MAP & STORE) GÜNCELLENDİ --- */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 100; 
+            left: 0; top: 0; 
+            width: 100%; height: 100%; 
+            
+            /* BLUR EFEKTİ BURADA */
+            background-color: rgba(0, 0, 0, 0.7); /* Arkası hafif görünsün ama karanlık olsun */
+            backdrop-filter: blur(8px); /* Arkadaki siteyi buzlu cam gibi yap */
+            -webkit-backdrop-filter: blur(8px); /* Safari desteği */
+
+            justify-content: center; align-items: center; flex-direction: column; 
+            animation: fadeIn 0.3s forwards; 
+        }
+
         .modal-content { background: #151515; padding: 10px; border-radius: 8px; width: 90%; max-width: 1000px; height: 80vh; border: 1px solid var(--rust-orange); position: relative; display: flex; flex-direction: column; }
+        @keyframes fadeIn { to { opacity: 1; } }
         
         /* STORE MODAL SPECIFIC */
         .store-modal-content { max-width: 1200px; height: auto; max-height: 90vh; overflow-y: auto; background: #121212; border: 1px solid #333; }
@@ -280,7 +296,6 @@
         // kits.js kontrolü
         if (typeof KITS === 'undefined') {
             console.error("KITS is undefined. Make sure kits.js is linked.");
-            alert("Kits loaded fail.");
         }
 
         // TEMEL AYARLAR
@@ -382,7 +397,7 @@
                                 <div class="kit-price">${kit.price}</div>
                                 <ul class="kit-contents">${contentsHTML}</ul>
                                 <button class="btn-buy" onclick="window.open('${kit.tebexPackageId}', '_blank')">
-                                    <i class="fas fa-shopping-cart"></i> ADD TO CART
+                                    <i class="fas fa-shopping-cart"></i> BUY NOW
                                 </button>
                             </div>
                         </div>
