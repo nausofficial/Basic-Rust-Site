@@ -11,7 +11,7 @@ const KITS = [
             "1000x Wood",
             "50x Scrap"
         ],
-        color: '#cd412b' // Turuncu (Rust Rengi)
+        color: '#5ce65c' // Yeşil (Green)
     },
     {
         id: 'vip',
